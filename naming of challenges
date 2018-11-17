@@ -1,0 +1,30 @@
+#create a list of all challenges within the directory leaving only unique variables
+
+#importing glob to get all file names, which includes their challenge names, date, and time
+import glob, re
+
+#uses glob to find current directory of all files ending with .csv & including challenges
+curDir = glob.glob("*Challenge*.csv")
+print(curDir)
+
+#creates a string for the directory to pull from while also adding a | to demarcate the start of challenge names 
+dirString = '|' + '|'.join(curDir)
+
+#use regular expressions to capture the name of the challenge 
+#also needs raw string input so python doesn't interpret anything while allowing regular expressions to do so
+pattern = re.compile(r'([a-zA-Z0-9\s_]*)-([a-zA-Z0-9\s_]*)-([a-zA-Z0-9\s_]*)')
+matches = pattern.finditer(dirString)
+
+#create a challenge list according to the matching regular expression and adds elements to that list and finally changes the list to only unique names
+challengeList = []
+
+#for loop for seeing 
+for match in matches:
+    print(match.group(1))
+    challengeList.append(match.group(1))
+
+#calls upon the list-set function to find only unique variables
+challengeList = list(set(challengeList))
+    
+print(challengeList)
+
